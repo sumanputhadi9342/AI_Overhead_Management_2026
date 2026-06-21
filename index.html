@@ -36,26 +36,8 @@
         document.getElementById("status").innerText =
             "Signed in as: " + accounts[0].username;
 
-        try {
-
-            await msalInstance.acquireTokenRedirect({
-    scopes: [
-        "User.Read",
-        "Files.Read",
-        "Sites.Read.All"
-    ],
-    account: accounts[0]
-});
-
-            console.log("TOKEN OK");
-            console.log(tokenResponse);
-
-        } catch (e) {
-
-            console.error("TOKEN ERROR");
-            console.error(e);
-
-        }
+        console.log("USER LOGGED IN");
+        console.log(accounts[0]);
 
     }
 
