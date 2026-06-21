@@ -34,6 +34,8 @@ async function login() {
 
 document.getElementById("loginBtn")
         .addEventListener("click", login);
+        
+await msalInstance.initialize();
 
 const accounts = msalInstance.getAllAccounts();
 
