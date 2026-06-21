@@ -34,6 +34,27 @@
         document.getElementById("status").innerText =
             "Signed in as: " + accounts[0].username;
     }
+    try {
+
+    const tokenResponse = await msalInstance.acquireTokenSilent({
+        scopes: [
+            "User.Read",
+            "Files.Read",
+            "Files.Read.All",
+            "Sites.Read.All"
+        ],
+        account: accounts[0]
+    });
+
+    console.log("TOKEN OK");
+    console.log(tokenResponse.accessToken);
+
+} catch (e) {
+
+    console.error("TOKEN ERROR");
+    console.error(e);
+
+}
 
     document.getElementById("loginBtn").onclick = async () => {
         await msalInstance.loginRedirect({
