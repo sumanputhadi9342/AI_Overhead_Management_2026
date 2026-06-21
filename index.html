@@ -5,44 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🤖 SAP Management Accounting – AI Agents &amp; Assistants | June 2026</title>
   
-  <button id="loginBtn"
-        style="position:fixed;top:10px;right:10px;z-index:9999;">
-    Login with Microsoft
-</button>
+
+<button id="loginBtn">Login with Microsoft</button>
+<div id="status">Not signed in</div>
 
 <script src="https://unpkg.com/@azure/msal-browser/lib/msal-browser.min.js"></script>
 
 <script>
-  
-const msalConfig = {
-    auth: {
-        clientId: "7a405a92-f548-4f7e-87dc-b2cf3c4a6bd4",
-        authority: "https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7",
-        redirectUri: "https://sumanputhadi9342.github.io/AI_Overhead_Management_2026/"
-    }
-};
+(async () => {
 
-const msalInstance = new msal.PublicClientApplication(msalConfig);
+    const msalConfig = {
+        auth: {
+            clientId: "7a405a92-f548-4f7e-87dc-b2cf3c4a6bd4",
+            authority: "https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7",
+            redirectUri: "https://sumanputhadi9342.github.io/AI_Overhead_Management_2026/"
+        }
+    };
 
-async function login() {
+    const msalInstance = new msal.PublicClientApplication(msalConfig);
+
     await msalInstance.initialize();
 
-    await msalInstance.loginRedirect({
-        scopes: ["User.Read"]
-    });
-}
+    await msalInstance.handleRedirectPromise();
 
-document.getElementById("loginBtn")
-        .addEventListener("click", login);
-        
-await msalInstance.initialize();
+    const accounts = msalInstance.getAllAccounts();
 
-const accounts = msalInstance.getAllAccounts();
+    if (accounts.length > 0) {
+        document.getElementById("status").innerText =
+            "Signed in as: " + accounts[0].username;
+    }
 
-if (accounts.length > 0) {
-    alert("Already logged in as: " + accounts[0].username);
-}
+    document.getElementById("loginBtn").onclick = async () => {
+        await msalInstance.loginRedirect({
+            scopes: ["User.Read"]
+        });
+    };
 
+})();
 </script>
   
 
