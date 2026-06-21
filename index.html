@@ -38,14 +38,14 @@
 
         try {
 
-            const tokenResponse = await msalInstance.acquireTokenPopup({
-                scopes: [
-                    "User.Read",
-                    "Files.Read",
-                    "Sites.Read.All"
-                ],
-                account: accounts[0]
-            });
+            await msalInstance.acquireTokenRedirect({
+    scopes: [
+        "User.Read",
+        "Files.Read",
+        "Sites.Read.All"
+    ],
+    account: accounts[0]
+});
 
             console.log("TOKEN OK");
             console.log(tokenResponse);
