@@ -6,52 +6,6 @@
   <title>🤖 SAP Management Accounting – AI Agents &amp; Assistants | June 2026</title>
   <script src="https://unpkg.com/@azure/msal-browser/lib/msal-browser.min.js"></script>
 
-<script>
-(async () => {
-
-    const msalConfig = {
-        auth: {
-            clientId: "7a405a92-f548-4f7e-87dc-b2cf3c4a6bd4",
-            authority: "https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7",
-            redirectUri: window.location.origin + window.location.pathname
-        },
-        cache: {
-            cacheLocation: "localStorage"
-        }
-    };
-
-    const msalInstance =
-        new msal.PublicClientApplication(msalConfig);
-
-    await msalInstance.initialize();
-
-    await msalInstance.handleRedirectPromise();
-
-    const accounts =
-        msalInstance.getAllAccounts();
-
-    console.log("ACCOUNTS:", accounts);
-
-    if (accounts.length > 0) {
-
-        document.getElementById("status").innerText =
-            "Signed in as: " + accounts[0].username;
-
-    }
-
-    document.getElementById("loginBtn").onclick =
-        async () => {
-
-            await msalInstance.loginRedirect({
-                scopes: ["User.Read"]
-            });
-
-        };
-
-})();
-</script>
-
-
 
   <style>
 
